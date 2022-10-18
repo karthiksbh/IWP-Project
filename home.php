@@ -1,6 +1,7 @@
 <?php
 
 include 'components/config.php';
+
 session_start();
 
 if(isset($_SESSION['user_id'])){
@@ -8,6 +9,8 @@ if(isset($_SESSION['user_id'])){
 }else{
    $user_id = '';
 };
+
+include 'components/wishlist_cart.php';
 
 ?>
 
@@ -17,10 +20,12 @@ if(isset($_SESSION['user_id'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Home Page</title>
+   <title>home</title>
 
    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
    <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -29,13 +34,16 @@ if(isset($_SESSION['user_id'])){
 <?php include 'components/user_header.php'; ?>
 
 <div class="home-bg">
+
    <div class="swiper home-slider">
+   
    <div class="swiper-wrapper">
 
       <div class="swiper-slide slide">
          <div class="image">
             <img src="images/image12.jpg" alt="">
          </div>
+        
       </div>
 
       <div class="swiper-slide slide">
@@ -49,22 +57,51 @@ if(isset($_SESSION['user_id'])){
             <img src="images/image14.jpg" alt="">
          </div>
       </div>
+
    </div>
 
    <div class="swiper-pagination" style="margin-top: 100px;"></div>
+
    </div>
+
 </div>
 
 <section class="category">
-   <br><br>
-   <h1 class="heading">Product Categories Available</h1>
+
+   <h1 class="heading">shop by category</h1>
 
    <div class="swiper category-slider">
+
    <div class="swiper-wrapper">
 
    <a href="category.php?category=laptop" class="swiper-slide slide">
       <img src="images/icon-1.png" alt="">
       <h3>Laptop</h3>
+   </a>
+
+   <a href="category.php?category=tv" class="swiper-slide slide">
+      <img src="images/icon-2.png" alt="">
+      <h3>TV</h3>
+   </a>
+
+   <a href="category.php?category=camera" class="swiper-slide slide">
+      <img src="images/icon-3.png" alt="">
+      <h3>Camera</h3>
+   </a>
+
+   <a href="category.php?category=mouse" class="swiper-slide slide">
+      <img src="images/icon-4.png" alt="">
+      <h3>Mouse</h3>
+   </a>
+
+   <a href="category.php?category=fridge" class="swiper-slide slide">
+      <img src="images/icon-5.png" alt="">
+      <h3>Fridge</h3>
+   </a>
+
+   <a href="category.php?category=washing" class="swiper-slide slide">
+      <img src="images/icon-6.png" alt="">
+      <h3>Washing Machine</h3>
    </a>
 
    <a href="category.php?category=smartphone" class="swiper-slide slide">
@@ -75,24 +112,22 @@ if(isset($_SESSION['user_id'])){
    <a href="category.php?category=watch" class="swiper-slide slide">
       <img src="images/icon-8.png" alt="">
       <h3>Watch</h3>
-
-   <a href="category.php?category=tv" class="swiper-slide slide">
-      <img src="images/icon-2.png" alt="">
-      <h3>TV</h3>
    </a>
 
-   <a href="category.php?category=mouse" class="swiper-slide slide">
-      <img src="images/icon-4.png" alt="">
-      <h3>Mouse</h3>
-   </a>
-   </a>
    </div>
+
+   <div class="swiper-pagination"></div>
+
    </div>
+
 </section>
 
 <section class="home-products">
-   <h1 class="heading">RECENTLY ADDED PRODUCTS</h1>
+
+   <h1 class="heading">latest products</h1>
+
    <div class="swiper products-slider">
+
    <div class="swiper-wrapper">
 
    <?php
@@ -101,7 +136,6 @@ if(isset($_SESSION['user_id'])){
      if($select_products->rowCount() > 0){
       while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){
    ?>
-
    <form action="" method="post" class="swiper-slide slide">
       <input type="hidden" name="pid" value="<?= $fetch_product['id']; ?>">
       <input type="hidden" name="name" value="<?= $fetch_product['name']; ?>">
@@ -120,12 +154,16 @@ if(isset($_SESSION['user_id'])){
    <?php
       }
    }else{
-      echo '<p class="empty">There are No products available yet. Try again later.</p>';
+      echo '<p class="empty">no products added yet!</p>';
    }
    ?>
+
    </div>
+
    <div class="swiper-pagination"></div>
+
    </div>
+
 </section>
 
 

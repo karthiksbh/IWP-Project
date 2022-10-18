@@ -24,6 +24,8 @@ if(isset($_GET['delete_all'])){
    header('location:wishlist.php');
 }
 
+include 'components/wishlist_cart.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -83,7 +85,7 @@ if(isset($_GET['delete_all'])){
    <div class="wishlist-total">
       <p>Total Price: <span>₹<?= $grand_total; ?>/-</span></p>
       <a href="shop.php" class="option-btn">continue shopping</a>
-      <a href="wishlist.php?delete_all" class="delete-btn <?= ($grand_total > 1)?'':'disabled'; ?>" onclick="return confirm('delete all from wishlist?');">delete all item</a>
+      <a href="wishlist.php?delete_all" class="delete-btn <?= ($grand_total > 1)?'':'disabled'; ?>" onclick="return confirm('Do You want to Delete?');">delete all item</a>
    </div>
 </section>
 

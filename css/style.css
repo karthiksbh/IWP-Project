@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap');
 
 :root {
-   --main-color: #f39c12;
+   --main-color: #FF6700;
    --orange: #f39c12;
    --red: #e74c3c;
    --black: #333;
@@ -37,7 +37,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-   background-color: #FF6700;
+   background-color: var(--main-color);
 }
 
 html {
@@ -94,7 +94,7 @@ section {
 }
 
 .delete-btn {
-   background-color: #FF6700;
+   background-color: var(--red);
 }
 
 .flex-btn {
@@ -237,6 +237,12 @@ section {
 #menu-btn {
    display: none;
 }
+
+/* .home-bg {
+   background: url(../images/home-bg.png) no-repeat;
+   background-size: cover;
+   background-position: center;
+} */
 
 .home-bg .home .slide {
    display: flex;
@@ -392,7 +398,7 @@ section {
 
 .home-products .slide .fa-heart:hover,
 .home-products .slide .fa-eye:hover {
-   background-color: #FF6700;
+   background-color: var(--black);
    color: var(--white);
 }
 
@@ -908,6 +914,33 @@ section {
 .checkout-orders form .flex .inputBox span {
    font-size: 1.8rem;
    color: var(--light-color);
+}
+
+.orders .box-container {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 1.5rem;
+   align-items: flex-start;
+}
+
+.orders .box-container .box {
+   padding: 1rem 2rem;
+   flex: 1 1 40rem;
+   border: var(--border);
+   background-color: var(--white);
+   box-shadow: var(--box-shadow);
+   border-radius: .5rem;
+}
+
+.orders .box-container .box p {
+   margin: .5rem 0;
+   line-height: 1.8;
+   font-size: 2rem;
+   color: var(--light-color);
+}
+
+.orders .box-container .box p span {
+   color: var(--main-color);
 }
 
 .footer {
