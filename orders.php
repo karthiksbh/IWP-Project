@@ -6,6 +6,31 @@ if(isset($_SESSION['user_id'])){
 }else{
    $user_id = '';
 };
+
+if(isset($_POST['bill'])){
+   $order_id = $_POST['order_id'];
+   $select_orders = $conn->prepare("SELECT * FROM `orders` WHERE id = ?");
+   $select_orders->execute([$order_id]);
+   if($select_orders->rowCount() > 0){
+      while($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)){
+         ob_end_clean();
+         require('fpdf/fpdf.php');
+         $pdf = new FPDF();
+         $pdf->AddPage();
+         $pdf->SetFont('Arial', 'B', 30);
+         $pdf->MultiCell(1200,30,'                     Invoice Copy');
+         $pdf->SetFont('Arial', 'B', 10);
+         $pdf->MultiCell(1200,5,"Order Placed on: ".$fetch_orders['placed_on']);
+         $pdf->MultiCell(1200,5,"Customer Name: ".$fetch_orders['name']);
+         $pdf->MultiCell(1200,5,"Customer Mobile Number: ".$fetch_orders['number']);
+         $pdf->MultiCell(1200,5,"Customer Address: ".$fetch_orders['address']);
+         $pdf->MultiCell(1200,5,"\n\nProducts Purchased: ".$fetch_orders['total_products']);
+         $pdf->MultiCell(1200,5,"\nTotal Price is: Rs.".$fetch_orders['total_price']);
+         $pdf->MultiCell(1200,5,"Payment Method is: ".$fetch_orders['method']);
+         $pdf->Output();
+}
+}
+}
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +67,11 @@ if(isset($_SESSION['user_id'])){
          <p>Payment Method : <span><?= $fetch_orders['method']; ?></span></p>
          <p>Your Orders : <span><?= $fetch_orders['total_products']; ?></span></p>
          <p>Total Price : <span>₹<?= $fetch_orders['total_price']; ?>/-</span></p>
-         <p> Payment Status : <span style="color:<?php if($fetch_orders['payment_status'] == 'Pending'){ echo 'red'; }else{ echo 'green'; }; ?>"><?= $fetch_orders['payment_status']; ?></span> </p>
+         <p> Order Status : <span style="color:<?php if($fetch_orders['payment_status'] == 'Pending'){ echo 'red'; }else{ echo 'green'; }; ?>"><?= $fetch_orders['payment_status']; ?></span> </p>
+         <form action="" method="post">
+         <input type="hidden" name="order_id" value="<?= $fetch_orders['id']; ?>">
+         <input type="submit" value="Download Bill" class="option-btn" name="bill"><br>
+         </form>
       </div>
    <?php
       }

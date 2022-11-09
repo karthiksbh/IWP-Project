@@ -18,6 +18,8 @@ if(isset($_POST['add_product'])){
    $price = filter_var($price, FILTER_SANITIZE_STRING);
    $details = $_POST['details'];
    $details = filter_var($details, FILTER_SANITIZE_STRING);
+   $category = $_POST['category'];
+   $category = filter_var($category, FILTER_SANITIZE_STRING);
 
    $image_01 = $_FILES['image_01']['name'];
    $image_01 = filter_var($image_01, FILTER_SANITIZE_STRING);
@@ -44,8 +46,8 @@ if(isset($_POST['add_product'])){
       $message[] = 'Product Already Exists!';
    }else{
 
-      $insert_products = $conn->prepare("INSERT INTO `products`(name, details, price, image_01, image_02, image_03) VALUES(?,?,?,?,?,?)");
-      $insert_products->execute([$name, $details, $price, $image_01, $image_02, $image_03]);
+      $insert_products = $conn->prepare("INSERT INTO `products`(name, details, price, image_01, image_02, image_03,productCat) VALUES(?,?,?,?,?,?,?)");
+      $insert_products->execute([$name, $details, $price, $image_01, $image_02, $image_03,$category]);
 
       if($insert_products){
          if($image_size_01 > 2000000 OR $image_size_02 > 2000000 OR $image_size_03 > 2000000){
@@ -58,7 +60,6 @@ if(isset($_POST['add_product'])){
          }
 
       }
-
    }  
 
 };
@@ -129,6 +130,11 @@ if(isset($_GET['delete'])){
             <span style="color:black">Enter The Product Details</span>
             <input name="details" placeholder="Details" style="border: 3px solid black;" class="box" required maxlength="500"></input>
          </div>
+
+         <div class="inputBox">
+            <span style="color:black">Enter The Category</span>
+            <input name="category" placeholder="Category" style="border: 3px solid black;" class="box" required maxlength="500"></input>
+         </div>
       </div>
       
       <input type="submit" value="add product" class="btn" name="add_product">
@@ -152,7 +158,8 @@ if(isset($_GET['delete'])){
       <img src="../uploaded_img/<?= $fetch_products['image_01']; ?>" alt="">
       <div class="name"><?= $fetch_products['name']; ?></div>
       <div class="price">₹<span><?= $fetch_products['price']; ?></span>/-</div>
-      <div class="details"><span><?= $fetch_products['details']; ?></span></div>
+      <div class="details" style="color:black;"><span><?= $fetch_products['details']; ?></span></div>
+      <div class="details" style="color:black;"><span><?= $fetch_products['productCat']; ?></span></div>
       <div class="flex-btn">
          <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn">update</a>
          <a href="products.php?delete=<?= $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete?');">delete</a>

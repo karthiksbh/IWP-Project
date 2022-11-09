@@ -31,7 +31,7 @@ include 'components/wishlist_cart.php';
    <div class="box-container">
    <?php
      $category = $_GET['category'];
-     $select_products = $conn->prepare("SELECT * FROM `products` WHERE name LIKE '%{$category}%'"); 
+     $select_products = $conn->prepare("SELECT * FROM `products` WHERE productCat like '%{$category}%'"); 
      $select_products->execute();
      if($select_products->rowCount() > 0){
       while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){

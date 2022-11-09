@@ -46,10 +46,10 @@ if(isset($_POST['send'])){
 <section class="contact">
    <form action="" method="post">
       <h3>Enter Your Queries</h3>
-      <input type="text" name="name" placeholder="Enter your Name" required maxlength="20" class="box">
-      <input type="email" name="email" placeholder="Enter your Email" required maxlength="50" class="box">
-      <input type="number" name="number" min="0" max="9999999999" placeholder="Enter your Number" required onkeypress="if(this.value.length == 10) return false;" class="box">
-      <textarea name="msg" class="box" placeholder="Enter your Message" cols="30" rows="10"></textarea>
+      <input type="text" style="border: 3px solid black;" name="name" placeholder="Enter your Name" required maxlength="20" class="box">
+      <input type="email" style="border: 3px solid black;" name="email" placeholder="Enter your Email" required maxlength="50" class="box">
+      <input type="number" style="border: 3px solid black;" name="number" min="0" max="9999999999" placeholder="Enter your Number" required onkeypress="if(this.value.length == 10) return false;" class="box">
+      <textarea name="msg" style="border: 3px solid black;" class="box" placeholder="Enter your Message" cols="30" rows="10"></textarea>
       <input type="submit" value="send message" name="send" style="background-color: #FF6700;" class="btn">
    </form>
 </section>
